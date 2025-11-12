@@ -17,4 +17,8 @@ export class SettingsService {
   updateSettings(newSettings: Partial<QuizSettings>) {
     this.settings = { ...this.settings, ...newSettings };
   }
+
+  printSettings() {
+    console.log(this.settings);
+  }
 }

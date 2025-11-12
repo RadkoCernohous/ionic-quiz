@@ -1,17 +1,35 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title>Config</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label>Number of questions</ion-label>
+    <ion-range min="5" max="15" step="1" snaps="true"
+               [(ngModel)]="amount" (ionChange)="onAmountChange()">
+      <ion-label slot="end">{{ amount }}</ion-label>
+    </ion-range>
+  </ion-item>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-item>
+    <ion-label>Category</ion-label>
+    <ion-select interface="popover" [(ngModel)]="categoryValue" (ionChange)="onCategoryChange()">
+      <ion-select-option *ngFor="let c of categories" [value]="c.value">
+        {{ c.text }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Difficulty</ion-label>
+    <ion-segment [(ngModel)]="difficulty" (ionChange)="onDifficultyChange()">
+      <ion-segment-button value="easy">Easy</ion-segment-button>
+      <ion-segment-button value="medium">Medium</ion-segment-button>
+      <ion-segment-button value="hard">Hard</ion-segment-button>
+    </ion-segment>
+  </ion-item>
+
+  <ion-note>Type is fixed: multiple choice</ion-note>
 </ion-content>
