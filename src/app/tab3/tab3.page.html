@@ -1,17 +1,28 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+    <ion-title>Results</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="clearAll()">Clear</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-list *ngIf="results.length; else empty">
+    <ion-item *ngFor="let r of results">
+  <ion-label>
+    <h2>{{ r.categoryText }} • {{ r.difficulty | titlecase }}</h2>
+    <p>{{ r.date | date:'short' }} — {{ r.correct }}/{{ r.total }} ({{ r.successPercent }}%)</p>
+  </ion-label>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-button fill="clear" color="danger" slot="end" (click)="confirmDelete(r)">
+    Delete
+  </ion-button>
+</ion-item>
+
+  </ion-list>
+
+  <ng-template #empty>
+    <ion-note>No results yet.</ion-note>
+  </ng-template>
 </ion-content>

@@ -1,13 +1,47 @@
 import { Component } from '@angular/core';
+import { AlertController } from '@ionic/angular';
+import { QuizResult } from '../models/types';
+import { ResultsService } from '../services/results.service';
 
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss'],
   standalone: false,
 })
 export class Tab3Page {
+  results: QuizResult[] = [];
 
-  constructor() {}
+  constructor(
+    private resultsService: ResultsService,
+    private alertCtrl: AlertController
+  ) {}
 
+  async ionViewWillEnter() {
+    this.results = await this.resultsService.getResults();
+  }
+
+  async clearAll() {
+    await this.resultsService.clearAll();
+    this.results = [];
+  }
+
+  async confirmDelete(result: QuizResult) {
+    const alert = await this.alertCtrl.create({
+      header: 'Delete this result?',
+      message: `${result.categoryText} • ${result.difficulty.toUpperCase()} • ${result.successPercent}%`,
+      buttons: [
+        { text: 'Cancel', role: 'cancel' },
+        {
+          text: 'Delete',
+          role: 'destructive',
+          handler: async () => {
+            await this.resultsService.removeById(result.id);
+            this.results = this.results.filter(r => r.id !== result.id);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 }

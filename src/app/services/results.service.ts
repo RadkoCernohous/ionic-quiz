@@ -24,4 +24,13 @@ export class ResultsService {
   async clearAll(): Promise<void> {
     await Preferences.remove({ key: RESULTS_KEY });
   }
+
+  async removeById(id: string): Promise<void> {
+    const all = await this.getResults();
+    const next = all.filter(r => r.id !== id);
+    await Preferences.set({
+      key: RESULTS_KEY,
+      value: JSON.stringify(next),
+    });
+  }
 }
