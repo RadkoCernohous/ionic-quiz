@@ -1,17 +1,25 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title>Quiz</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-text color="danger" *ngIf="error">{{ error }}</ion-text>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ng-container *ngIf="!current && !isLoading">
+    <ion-button expand="block" (click)="startQuiz()">Start Quiz</ion-button>
+  </ng-container>
+
+  <ion-button expand="block" disabled *ngIf="isLoading">Loading…</ion-button>
+
+  <ng-container *ngIf="current">
+    <h2 [innerText]="current.question"></h2>
+    <ion-list>
+      <ion-item button *ngFor="let a of current.answers" (click)="choose(a)">
+        <ion-label [innerText]="a"></ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-note>Question {{ index + 1 }} / {{ total }}</ion-note>
+  </ng-container>
 </ion-content>
