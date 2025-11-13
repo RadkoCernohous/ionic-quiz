@@ -1,35 +1,58 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Config</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Configuration</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-item>
-    <ion-label>Number of questions</ion-label>
-    <ion-range min="5" max="15" step="1" snaps="true"
-               [(ngModel)]="amount" (ionChange)="onAmountChange()">
-      <ion-label slot="end">{{ amount }}</ion-label>
-    </ion-range>
-  </ion-item>
+  <div class="config-wrapper">
+    <h1 class="page-title">Quiz Settings</h1>
 
-  <ion-item>
-    <ion-label>Category</ion-label>
-    <ion-select interface="popover" [(ngModel)]="categoryValue" (ionChange)="onCategoryChange()">
-      <ion-select-option *ngFor="let c of categories" [value]="c.value">
-        {{ c.text }}
-      </ion-select-option>
-    </ion-select>
-  </ion-item>
+    <ion-item lines="none">
+      <ion-label position="stacked">Number of questions: {{ amount }}</ion-label>
+      <ion-range 
+        min="5" 
+        max="15" 
+        step="1" 
+        snaps="true" 
+        [(ngModel)]="amount" 
+        (ionChange)="onAmountChange()">
+      </ion-range>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>Difficulty</ion-label>
-    <ion-segment [(ngModel)]="difficulty" (ionChange)="onDifficultyChange()">
-      <ion-segment-button value="easy">Easy</ion-segment-button>
-      <ion-segment-button value="medium">Medium</ion-segment-button>
-      <ion-segment-button value="hard">Hard</ion-segment-button>
-    </ion-segment>
-  </ion-item>
+    <ion-item>
+      <ion-label>Category</ion-label>
+      <ion-select 
+        interface="popover" 
+        [(ngModel)]="categoryValue" 
+        (ionChange)="onCategoryChange()">
+        <ion-select-option 
+          *ngFor="let c of categories" 
+          [value]="c.value">
+          {{ c.text }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
 
-  <ion-note>Type is fixed: multiple choice</ion-note>
+    <ion-item>
+      <ion-label>Difficulty</ion-label>
+      <ion-segment 
+        [(ngModel)]="difficulty" 
+        (ionChange)="onDifficultyChange()">
+        <ion-segment-button value="easy">Easy</ion-segment-button>
+        <ion-segment-button value="medium">Medium</ion-segment-button>
+        <ion-segment-button value="hard">Hard</ion-segment-button>
+      </ion-segment>
+    </ion-item>
+
+    <div class="actions">
+      <ion-button expand="block" routerLink="/tabs/tab2">
+        Go to Quiz
+      </ion-button>
+
+      <ion-button expand="block" fill="outline" routerLink="/tabs/tab3">
+        View Results
+      </ion-button>
+    </div>
+  </div>
 </ion-content>

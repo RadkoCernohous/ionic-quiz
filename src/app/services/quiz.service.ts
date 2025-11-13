@@ -66,8 +66,8 @@ export class QuizService {
 
   // Dekodovani HTML entit v otazkach a odpovedich (napr. &amp; -> &)
   private decode(text: string): string {
-  const textarea = document.createElement('textarea');
-  textarea.innerHTML = text;
-  return textarea.value;
- }
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = text;
+    return textarea.value;
+  }
 }

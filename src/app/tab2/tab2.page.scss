@@ -1,0 +1,71 @@
+.quiz-wrapper {
+  max-width: 40rem;
+  margin: 0 auto;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.error-text {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.start-wrapper {
+  margin-top: 4rem;
+}
+
+.question-card {
+  margin-bottom: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.1rem 0.4rem rgba(15, 23, 42, 0.08);
+}
+
+.quiz-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.question-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.quiz-wrapper ion-button {
+  --border-radius: 999rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0.03em;
+}
+
+.answers {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.answers ion-button {
+  --padding-top: 0.8rem;
+  --padding-bottom: 0.8rem;
+  --border-radius: 999rem;
+  --border-width: 0.1rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0.03em;
+}
+
+.answers ion-button.button-outline {
+  --border-style: solid;
+}
+
+.answers ion-button.button-solid {
+  --border-style: solid;
+  --border-color: transparent;
+}
+

@@ -20,11 +20,11 @@ export interface Question {
 export interface QuizResult {
   id: string;               // UUID
   date: string;            // ISO
-  categoryText: string;     // nazev kategorie jako text, ne cislo
+  categoryText: string;     // nazev kategorie jako text
   difficulty: Difficulty;
   correct: number;         
   total: number;      
-  successPercent: number;  // 0–100 - correct / total * 100
+  successPercent: number;
 }
 
 
@@ -35,7 +35,7 @@ export interface CategoryOption {
 }
 
 export const CATEGORIES: CategoryOption[] = [
-  { value: 'any', text: 'Any Category' },
+  { value: 'any', text: 'Mixed Categories' },
   { value: '9', text: 'General Knowledge' },
   { value: '10', text: 'Entertainment: Books' },
   { value: '11', text: 'Entertainment: Film' },

@@ -1,28 +1,37 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Results</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="clearAll()">Clear</ion-button>
+      <ion-button (click)="deleteAll()">Delete All</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-list *ngIf="results.length; else empty">
-    <ion-item *ngFor="let r of results">
-  <ion-label>
-    <h2>{{ r.categoryText }} • {{ r.difficulty | titlecase }}</h2>
-    <p>{{ r.date | date:'short' }} — {{ r.correct }}/{{ r.total }} ({{ r.successPercent }}%)</p>
-  </ion-label>
+  <div class="results-wrapper">
+    <ion-list *ngIf="results.length; else empty" class="results-list">
+      <ion-item *ngFor="let r of results" lines="none" class="result-item">
+        <ion-label>
+          <h2>{{ r.categoryText }} • {{ r.successPercent }}%</h2>
+          <p>
+            {{ r.date | date: 'short' }} | {{ r.difficulty | titlecase }} | {{ r.correct }}/{{ r.total }}
+          </p>
+        </ion-label>
 
-  <ion-button fill="clear" color="danger" slot="end" (click)="confirmDelete(r)">
-    Delete
-  </ion-button>
-</ion-item>
+        <ion-button
+          fill="clear"
+          color="danger"
+          slot="end"
+          (click)="deleteOne(r)">
+          Delete
+        </ion-button>
+      </ion-item>
+    </ion-list>
 
-  </ion-list>
-
-  <ng-template #empty>
-    <ion-note>No results yet.</ion-note>
-  </ng-template>
+    <ng-template #empty>
+      <ion-note color="medium" class="empty-note">
+        No results yet.
+      </ion-note>
+    </ng-template>
+  </div>
 </ion-content>

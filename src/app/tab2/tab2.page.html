@@ -1,25 +1,63 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Quiz</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-text color="danger" *ngIf="error">{{ error }}</ion-text>
+  <div class="quiz-wrapper">
+    <ion-text color="danger" *ngIf="error" class="error-text">
+      {{ error }}
+    </ion-text>
 
-  <ng-container *ngIf="!current && !isLoading">
-    <ion-button expand="block" (click)="startQuiz()">Start Quiz</ion-button>
-  </ng-container>
+    <ng-container *ngIf="!current && !isLoading && !error">
+      <div class="start-wrapper">
+        <ion-button expand="block" (click)="startQuiz()">
+          Start Quiz
+        </ion-button>
+      </div>
+    </ng-container>
 
-  <ion-button expand="block" disabled *ngIf="isLoading">Loading…</ion-button>
+    <div *ngIf="isLoading" class="start-wrapper">
+      <ion-button expand="block" disabled>
+        Loading…
+      </ion-button>
+    </div>
 
-  <ng-container *ngIf="current">
-    <h2 [innerText]="current.question"></h2>
-    <ion-list>
-      <ion-item button *ngFor="let a of current.answers" (click)="choose(a)">
-        <ion-label [innerText]="a"></ion-label>
-      </ion-item>
-    </ion-list>
-    <ion-note>Question {{ index + 1 }} / {{ total }}</ion-note>
-  </ng-container>
+    <ng-container *ngIf="current">
+      <ion-card class="question-card">
+        <ion-card-content>
+          <div class="quiz-header">
+            <ion-chip color="primary">
+              Question {{ index + 1 }}/{{ total }}
+            </ion-chip>
+            <ion-chip color="medium" *ngIf="current.categoryText">
+              {{ current.categoryText }}
+            </ion-chip>
+          </div>
+          <h2 class="question-text" [innerText]="current.question"></h2>
+        </ion-card-content>
+      </ion-card>
+
+      <div class="answers">
+        <ion-button
+          expand="block"
+          *ngFor="let a of current.answers"
+          [color]="getAnswerColor(a)"
+          [fill]="selectedAnswer === null ? 'outline' : 'solid'"
+          [disabled]="selectedAnswer !== null"
+          (click)="choose(a)">
+          {{ a }}
+        </ion-button>
+      </div>
+
+      <ion-button
+        expand="block"
+        class="next-btn"
+        (click)="next()"
+        [disabled]="selectedAnswer === null">
+        {{ index + 1 === total ? 'Finish quiz' : 'Next question' }}
+      </ion-button>
+    </ng-container>
+  </div>
 </ion-content>

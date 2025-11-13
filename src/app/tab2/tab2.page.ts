@@ -8,6 +8,7 @@ import { ResultsService } from '../services/results.service';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
+  styleUrls: ['tab2.page.scss'],
   standalone: false,
 })
 export class Tab2Page {
@@ -18,24 +19,17 @@ export class Tab2Page {
   index = 0;
   correct = 0;
 
-  get total() {
-    return this.questions.length;
-  }
+  selectedAnswer: string | null = null;
 
-  get current(): Question | null {
-    if (this.index < 0 || this.index >= this.questions.length) {
-      return null;
-    }
-    return this.questions[this.index];
-  }
-
+  get total() { return this.questions.length; }
+  get current(): Question | null { return this.questions[this.index] ?? null; }
 
   constructor(
     private settings: SettingsService,
     private quiz: QuizService,
     private results: ResultsService,
     private router: Router
-  ) { }
+  ) {}
 
   async startQuiz() {
     this.isLoading = true; this.error = undefined;
@@ -44,48 +38,65 @@ export class Tab2Page {
       this.questions = await this.quiz.fetchQuestions(s);
       this.index = 0;
       this.correct = 0;
+      this.selectedAnswer = null;
 
       if (!this.questions.length) {
-        this.error = 'Could not load questions. Please try different settings.';
+        this.error = 'No questions returned for this configuration.';
       }
-    } catch (e) {
+    } catch {
       this.error = 'Failed to load questions.';
     } finally {
       this.isLoading = false;
     }
   }
 
-  async choose(answer: string) {
-    const q = this.current;
-    if (q === null){
-      return;
-    }
+  choose(answer: string) {
+    if (!this.current || this.selectedAnswer) return; 
 
-    if (answer === q.correctAnswer) {
+    this.selectedAnswer = answer;
+
+    if (answer === this.current.correctAnswer) {
       this.correct++;
     }
+  }
+
+  async next() {
+    if (!this.current || this.selectedAnswer === null) return;
+
     this.index++;
+    this.selectedAnswer = null;
 
     if (this.index >= this.total) {
       await this.finish();
     }
   }
 
-  private async finish() {
-    const first = this.questions[0]; // pro ziskani kategorie a obtiznosti
-    if (!first) return;
+  getAnswerColor(answer: string): string {
+    if (this.selectedAnswer === null) {
+      return 'primary';
+    }
 
+    const correctAnswer = this.current?.correctAnswer;
+
+    if (answer === correctAnswer) {
+      return 'success';
+    }
+    if ((answer === this.selectedAnswer) && (answer !== correctAnswer)) {
+      return 'danger';
+    }
+    return 'medium';
+  }
+
+  private async finish() {
     const result: QuizResult = {
       id: Date.now().toString(),
       date: new Date().toISOString(),
-      categoryText: first.categoryText,
-      difficulty: first.difficulty,
+      categoryText: this.settings.getCategoryText(),
+      difficulty: this.settings.getSettings().difficulty,
       correct: this.correct,
       total: this.total,
       successPercent: Math.round((this.correct / this.total) * 100),
     };
-
-    console.log('Quiz finished, result:', result);
 
     await this.results.addResult(result);
     this.router.navigate(['/tabs/tab3']);

@@ -6,6 +6,7 @@ import { ResultsService } from '../services/results.service';
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
+  styleUrls: ['tab3.page.scss'],
   standalone: false,
 })
 export class Tab3Page {
@@ -20,12 +21,27 @@ export class Tab3Page {
     this.results = await this.resultsService.getResults();
   }
 
-  async clearAll() {
-    await this.resultsService.clearAll();
-    this.results = [];
+  async deleteAll() {
+    const alert = await this.alertCtrl.create({
+      header: 'Delete all results?',
+      message: 'This action cannot be undone.',
+      buttons: [
+        { text: 'Cancel', role: 'cancel' },
+        {
+          text: 'Delete All',
+          role: 'destructive',
+          handler: async () => {
+            await this.resultsService.clearAll();
+            this.results = [];
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
-  async confirmDelete(result: QuizResult) {
+  async deleteOne(result: QuizResult) {
     const alert = await this.alertCtrl.create({
       header: 'Delete this result?',
       message: `${result.categoryText} • ${result.difficulty.toUpperCase()} • ${result.successPercent}%`,

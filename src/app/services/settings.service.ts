@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Difficulty, QuizSettings } from '../models/types';
+import { CATEGORIES, Difficulty, QuizSettings } from '../models/types';
 
 @Injectable({ providedIn: 'root' })
 export class SettingsService {
@@ -20,5 +20,20 @@ export class SettingsService {
 
   printSettings() {
     console.log(this.settings);
+  }
+
+  getCategoryText(): string {
+    const category = this.settings.categoryValue;
+
+    if (category === 'any') {
+      return 'Mixed Categories';
+    }
+
+    const categoryOption = CATEGORIES.find(cat => cat.value === category);
+    if (categoryOption) {
+      return categoryOption.text;
+    } 
+
+    return 'Unknown Category';
   }
 }
