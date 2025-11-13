@@ -8,8 +8,10 @@
   <div class="config-wrapper">
     <h1 class="page-title">Quiz Settings</h1>
 
-    <ion-item lines="none">
-      <ion-label position="stacked">Number of questions: {{ amount }}</ion-label>
+    <ion-item lines="none" class="questions-item">
+      <ion-label position="stacked">
+        Number of questions: {{ amount }}
+      </ion-label>
       <ion-range 
         min="5" 
         max="15" 
@@ -20,8 +22,8 @@
       </ion-range>
     </ion-item>
 
-    <ion-item>
-      <ion-label>Category</ion-label>
+    <ion-item lines="none">
+      <ion-label position="stacked">Category</ion-label>
       <ion-select 
         interface="popover" 
         [(ngModel)]="categoryValue" 
@@ -34,8 +36,8 @@
       </ion-select>
     </ion-item>
 
-    <ion-item>
-      <ion-label>Difficulty</ion-label>
+    <ion-item lines="none" class="difficulty-item">
+      <ion-label position="stacked">Difficulty</ion-label>
       <ion-segment 
         [(ngModel)]="difficulty" 
         (ionChange)="onDifficultyChange()">

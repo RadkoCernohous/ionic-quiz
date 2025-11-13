@@ -25,8 +25,23 @@
 }
 
 .config-wrapper ion-label[position="stacked"] {
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+}
+
+.questions-item ion-label[position="stacked"] {
   font-size: 1.3rem;
-  margin-bottom: 0.5rem;
+}
+
+.difficulty-item ion-segment {
+  width: 100%;
+}
+
+.difficulty-item ion-segment-button {
+  font-size: 0.95rem;
+  --padding-start: 0.4rem;
+  --padding-end: 0.4rem;
+  white-space: nowrap;
 }
 
 .actions {
