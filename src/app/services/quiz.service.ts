@@ -51,6 +51,7 @@ export class QuizService {
       const question = this.decode(result.question);
       const correctAnswer = this.decode(result.correct_answer);
       const incorrectAnswers = result.incorrect_answers.map(a => this.decode(a));
+      const categoryText = this.decode(result.category);
 
       const answers = shuffle([...incorrectAnswers, correctAnswer]);
 
@@ -58,7 +59,7 @@ export class QuizService {
         question,
         answers,
         correctAnswer,
-        categoryText: result.category,
+        categoryText,
         difficulty: result.difficulty
       };
     });

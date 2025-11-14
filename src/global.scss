@@ -35,3 +35,31 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+:root {
+  --ion-background-color: #f4f5f8;
+  --ion-text-color: #000000;
+
+  --ion-text-title-color: #000000;
+  --ion-card-background: #ffffff;
+
+  --ion-item-background: #ffffff;
+
+  --ion-color-primary: #3880ff;
+  --ion-color-primary-contrast: #ffffff;
+}
+
+body.dark {
+  --ion-background-color: #000000;
+  --ion-text-color: #ffffff;
+
+  --ion-text-title-color: #ffffff;
+  --ion-card-background: #686868;
+
+  --ion-item-background: #1f2023;
+
+  --ion-color-primary: #4c8dff;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-medium: #f4f5f8;
+}
+

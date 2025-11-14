@@ -7,6 +7,12 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-searchbar
+  placeholder="Search by category"
+  debounce="300"
+  (ionInput)="filterResults($event)">
+</ion-searchbar>
+
 <ion-content class="ion-padding">
   <div class="results-wrapper">
     <ion-list *ngIf="results.length; else empty" class="results-list">

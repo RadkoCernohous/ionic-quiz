@@ -69,3 +69,60 @@
   --border-color: transparent;
 }
 
+ion-card.question-card {
+  --background: var(--ion-card-background);
+  color: var(--ion-text-color);
+}
+
+.question-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--ion-text-color);
+}
+
+.quiz-header ion-chip[color="medium"] {
+  --color: var(--ion-text-color);
+}
+
+:host-context(.dark) {
+  .quiz-wrapper {
+    background: var(--ion-background-color, #0b1220);
+    color: var(--ion-text-color, #fff);
+  }
+
+  ion-card.question-card {
+    --background: rgba(255, 255, 255, 0.03);
+    box-shadow: 0 0.1rem 0.6rem rgba(0, 0, 0, 0.6);
+    color: var(--ion-text-color, #fff);
+  }
+
+  .question-text {
+    color: var(--ion-text-color, #fff);
+  }
+
+  .quiz-header ion-chip[color="medium"] {
+    --color: rgba(255, 255, 255, 0.85);
+  }
+
+  .quiz-wrapper ion-button {
+    --color: var(--ion-text-color, #fff);
+  }
+
+  .answers ion-button {
+    --background: transparent;
+    --color: var(--ion-text-color, #fff);
+    --border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .answers ion-button.button-solid {
+    --background: rgba(255, 255, 255, 0.04);
+    --border-color: transparent;
+  }
+
+  .answers ion-button.button-outline {
+    --border-style: solid;
+    --border-color: rgba(255, 255, 255, 0.12);
+  }
+}
+

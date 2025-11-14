@@ -11,7 +11,7 @@
 }
 
 .result-item {
-  --background: #ffffff;
+  --background: var(--ion-card-background);
   --border-radius: 0.9rem;
   --inner-padding-start: 1.25rem;
   --inner-padding-end: 0.75rem;
@@ -35,6 +35,7 @@
   margin: 0;
 }
 
+
 .result-item ion-button {
   font-size: 0.9rem;
   font-weight: 500;
@@ -47,3 +48,11 @@
   text-align: center;
   font-size: 0.95rem;
 }
+
+ion-searchbar {
+  --background: var(--config-item-background);
+  --color: var(--ion-text-title-color);
+  --icon-color: var(--ion-text-title-color);
+  --placeholder-color: color-mix(in srgb, var(--ion-text-title-color) 60%, transparent);
+}
+

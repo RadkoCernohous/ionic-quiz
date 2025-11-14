@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CATEGORIES, CategoryOption, Difficulty } from '../models/types';
 import { SettingsService } from '../services/settings.service';
 
@@ -8,12 +8,14 @@ import { SettingsService } from '../services/settings.service';
   styleUrls: ['tab1.page.scss'],
   standalone: false,
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
   categories: CategoryOption[] = CATEGORIES;
 
   amount = 10;
   categoryValue = 'any';
   difficulty: Difficulty = 'medium';
+
+  isDarkMode = false;
 
   constructor(private settings: SettingsService) {
     const s = this.settings.getSettings();
@@ -25,10 +27,29 @@ export class Tab1Page {
   onAmountChange() {
     this.settings.updateSettings({ amount: this.amount });
   }
+
   onCategoryChange() {
     this.settings.updateSettings({ categoryValue: this.categoryValue });
   }
+
   onDifficultyChange() {
     this.settings.updateSettings({ difficulty: this.difficulty });
+  }
+
+
+  ngOnInit() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    this.isDarkMode = prefersDark.matches;
+    this.setBodyDarkClass(this.isDarkMode);
+  }
+
+  toggleDarkTheme() {
+    this.isDarkMode = !this.isDarkMode;
+    this.setBodyDarkClass(this.isDarkMode);
+  }
+
+  setBodyDarkClass(shouldAdd: boolean) {
+    document.body.classList.toggle('dark', shouldAdd);
   }
 }

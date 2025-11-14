@@ -84,7 +84,12 @@ export class Tab2Page {
     if ((answer === this.selectedAnswer) && (answer !== correctAnswer)) {
       return 'danger';
     }
-    return 'medium';
+
+    if(document !== undefined && document.body.classList.contains('dark')) {
+      return 'light';
+    } else {
+      return 'medium';
+    }
   }
 
   private async finish() {
@@ -100,5 +105,17 @@ export class Tab2Page {
 
     await this.results.addResult(result);
     this.router.navigate(['/tabs/tab3']);
+  }
+
+  resetQuiz() {
+    this.questions = [];
+    this.index = 0;
+    this.correct = 0;
+    this.selectedAnswer = null;
+    this.error = undefined;
+  }
+
+  ionViewWillLeave() {
+    this.resetQuiz();
   }
 }

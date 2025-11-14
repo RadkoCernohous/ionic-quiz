@@ -55,9 +55,20 @@ export class Tab3Page {
             this.results = this.results.filter(r => r.id !== result.id);
           }
         }
-      ]
+      ],
+      cssClass: 'my-alert'
     });
 
     await alert.present();
+  }
+
+  async filterResults(event: any) {
+    const searchTerm = event.target.value.toLowerCase();
+    this.results = await this.resultsService.getResults();
+    if (searchTerm && searchTerm.trim() !== '') {
+      this.results = this.results.filter(result =>
+        result.categoryText.toLowerCase().includes(searchTerm)
+      );
+    }
   }
 }

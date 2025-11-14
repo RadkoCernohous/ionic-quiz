@@ -12,8 +12,9 @@
   margin: 0 0 1.5rem;
 }
 
+
 .config-wrapper ion-item {
-  --background: #ffffff;
+  --background: var(--ion-card-background);
   --inner-padding-top: 0.9rem;
   --inner-padding-bottom: 0.9rem;
   --inner-padding-start: 1rem;
