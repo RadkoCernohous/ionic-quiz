@@ -44,7 +44,7 @@ export class Tab3Page {
   async deleteOne(result: QuizResult) {
     const alert = await this.alertCtrl.create({
       header: 'Delete this result?',
-      message: `${result.categoryText} • ${result.difficulty.toUpperCase()} • ${result.successPercent}%`,
+      message: `${result.categoryText} • ${result.difficulty} • ${result.successPercent}%`,
       buttons: [
         { text: 'Cancel', role: 'cancel' },
         {

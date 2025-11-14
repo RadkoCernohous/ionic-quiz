@@ -51,8 +51,8 @@
 
 ion-searchbar {
   --background: var(--config-item-background);
-  --color: var(--ion-text-title-color);
-  --icon-color: var(--ion-text-title-color);
-  --placeholder-color: color-mix(in srgb, var(--ion-text-title-color) 60%, transparent);
+  --color: var(--ion-text-color);
+  --icon-color: var(--ion-text-color);
+  --placeholder-color: color-mix(in srgb, var(--ion-text-color) 60%, transparent);
 }
 

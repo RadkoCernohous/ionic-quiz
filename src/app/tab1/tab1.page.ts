@@ -10,7 +10,6 @@ import { SettingsService } from '../services/settings.service';
 })
 export class Tab1Page implements OnInit {
   categories: CategoryOption[] = CATEGORIES;
-
   amount = 10;
   categoryValue = 'any';
   difficulty: Difficulty = 'medium';
