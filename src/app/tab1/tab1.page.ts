@@ -8,7 +8,7 @@ import { SettingsService } from '../services/settings.service';
   styleUrls: ['tab1.page.scss'],
   standalone: false,
 })
-export class Tab1Page implements OnInit {
+export class Tab1Page {
   categories: CategoryOption[] = CATEGORIES;
   amount = 10;
   categoryValue = 'any';
@@ -35,20 +35,8 @@ export class Tab1Page implements OnInit {
     this.settings.updateSettings({ difficulty: this.difficulty });
   }
 
-
-  ngOnInit() {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-
-    this.isDarkMode = prefersDark.matches;
-    this.setBodyDarkClass(this.isDarkMode);
-  }
-
   toggleDarkTheme() {
     this.isDarkMode = !this.isDarkMode;
-    this.setBodyDarkClass(this.isDarkMode);
-  }
-
-  setBodyDarkClass(shouldAdd: boolean) {
-    document.body.classList.toggle('dark', shouldAdd);
+    document.body.classList.toggle('dark', this.isDarkMode);
   }
 }

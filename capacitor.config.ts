@@ -2,8 +2,17 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
-  appName: 'ionic-quiz',
-  webDir: 'www'
+  appName: 'Quiz',
+  webDir: 'www',
+  plugins: {
+    SplashScreen: {      
+      launchAutoHide: true,
+      androidSplashResourceName: 'splash',
+      androidScaleType: 'CENTER_CROP',
+      showSpinner: true,
+      spinnerStyle: 'large',
+    },
+  },
 };
 
 export default config;
